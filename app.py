@@ -7,10 +7,10 @@ app.secret_key = 'secret123'  # You can also set this as an env variable if need
 
 # Connect to MySQL using environment variables
 db_work = mysql.connector.connect(
-    host=os.getenv("DB_HOST"),
-    user=os.getenv("DB_USER"),
-    password=os.getenv("DB_PASSWORD"),
-    database=os.getenv("DB_NAME"),
+    host=os.getenv("localhost"),
+    user=os.getenv("root"),
+    password=os.getenv("Selva@1234"),
+    database=os.getenv("work"),
     raise_on_warnings=True
 )
 cursor_work = db_work.cursor()
