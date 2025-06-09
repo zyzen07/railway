@@ -3,8 +3,9 @@ import mysql.connector
 import os
 
 app = Flask(__name__)
-app.secret_key = 'secret123'
+app.secret_key = 'secret123'  # You can also set this as an env variable if needed
 
+# Connect to MySQL using environment variables
 db_work = mysql.connector.connect(
     host=os.getenv("DB_HOST"),
     user=os.getenv("DB_USER"),
@@ -19,17 +20,17 @@ def login():
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
-        
+
         cursor_work.execute("SELECT * FROM users WHERE username=%s AND password=%s", (username, password))
         user = cursor_work.fetchone()
-        
+
         if user:
-            return "Login Successful! Welcome, " + username
+            return f"Login Successful! Welcome, {username}"
         else:
             flash("Invalid username or password")
             return redirect(url_for('login'))
-    
+
     return render_template('login.html')
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run()
